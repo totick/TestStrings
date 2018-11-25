@@ -4,6 +4,33 @@ namespace TestStrings
 {
     class MainClass
     {
+        static string RetrieveFirstName(string fullName)
+        {
+            int index = fullName.IndexOf(' ');
+            return fullName.Substring(0, index);
+        }
+
+        static string RetrieveLastName(string fullName)
+        {
+            int index = fullName.IndexOf(' ');
+            return fullName.Substring(index + 1);
+        }
+
+        static void IsValidString(string text)
+        {
+            Boolean isValid;
+            isValid = !string.IsNullOrWhiteSpace(text);
+
+            if(isValid)
+            {
+                Console.WriteLine("Valid");
+            }
+            else
+            {
+                Console.WriteLine("Invalid");
+            }
+        }
+
         public static void Main(string[] args)
         {
             string fname = "John";
@@ -28,6 +55,14 @@ namespace TestStrings
                 what is going on?
                 I wish you were here.";
             Console.WriteLine(text);
+
+            Console.WriteLine(RetrieveFirstName("John Lundgren"));
+            Console.WriteLine(RetrieveLastName("John Lundgren"));
+
+            IsValidString(" ");
+            IsValidString("");
+            IsValidString(null);
+            IsValidString(" r");
         }
     }
 }
