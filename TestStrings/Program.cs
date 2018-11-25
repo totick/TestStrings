@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace TestStrings
 {
@@ -29,6 +30,29 @@ namespace TestStrings
             {
                 Console.WriteLine("Invalid");
             }
+        }
+
+        static StringBuilder CreateHeader(string headerText)
+        {
+            var builder = new StringBuilder();
+
+            return builder.Append('-', 10)
+                .AppendLine()
+                .Append(headerText)
+                .AppendLine()
+                .Append('-', 10);
+        }
+
+        static void ReplaceCharacters(StringBuilder builder, char oldChar, char newChar)
+        {
+            builder.Replace(oldChar, newChar);
+        }
+
+        static string FormatPriceValue(float price, string noDecimalPoints)
+        {
+            string currencyFormat = "C" + noDecimalPoints;
+            string formattedPrice = price.ToString(currencyFormat);
+            return formattedPrice;
         }
 
         public static void Main(string[] args)
@@ -63,6 +87,22 @@ namespace TestStrings
             IsValidString("");
             IsValidString(null);
             IsValidString(" r");
+
+            Console.WriteLine(FormatPriceValue(99.991459f, "0"));
+
+            var header = CreateHeader("Welcome");
+
+            Console.WriteLine(header);
+
+            ReplaceCharacters(header, '-', '+');
+
+            Console.WriteLine(header);
+
+            header.Remove(0, 10);
+            Console.WriteLine(header);
+
+            header.Insert(0, new string('*', 10));
+            Console.WriteLine(header);
         }
     }
 }
